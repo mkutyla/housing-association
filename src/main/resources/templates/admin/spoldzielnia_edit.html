@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edytowanie spółdzielni</title>
+    <link rel="icon" type="image/svg" th:href="@{/images/favicon.svg}">
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/main" title="Strona główna"><i class="fa-solid fa-building"></i> BADA
+            Spółdzielnia Mieszkaniowa</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Strona główna</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">
+                        <span class="fa-solid fa-user"></span>
+                        <b style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b>
+                    </a>
+                </li>
+
+                <form class="navbar-form" name="logoutForm" th:action="@{/index}" method="post">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button class="btn btn-primary" type="button"
+                                    onclick="successfullyLogout()" title="Wyloguj" value="Sign Out">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </button>
+                        </a>
+                    </li>
+                </form>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container d-flex justify-content-center mb-5">
+    <div class="row">
+        <div class="col-12 mt-5">
+            <h1 class="text-center">Aktualizuj spółdzielnię</h1>
+            <form name="addSpoldzielnia" action="#" th:action="@{/spoldzielnia/update}" th:object="${spoldzielnia}"
+                  onsubmit="return validateSpoldzielnia()" method="post">
+                <table class="table-bordered table">
+
+                    <!-- 1st row -->
+                    <tr>
+                        <td>Nr spółdzielni:</td>
+                        <td><input type="text" class="form-control" th:field="*{nr_spoldzielni}" readonly="readonly">
+                        </td>
+                    </tr>
+                    <!-- 2nd row -->
+                    <tr>
+                        <td>Nazwa:</td>
+                        <td><input name="nazwa" type="text" class="form-control" th:field="*{nazwa}" required></td>
+                    </tr>
+                    <!-- 3rd row -->
+                    <tr>
+                        <td>Data założenia:</td>
+                        <td><input name="data_zalozenia" type="text" class="form-control"
+                                   th:field="*{data_zalozenia}" readonly="readonly">
+                        </td>
+                    </tr>
+                    <!-- 4th row -->
+                    <tr>
+                        <td>Adres:</td>
+                        <td>
+                            <select class="form-control" th:field="*{nr_adresu}" required>
+                                <option class="form-control" th:each="adres : ${adresy}" th:value="${adres.nr_adresu}"
+                                        th:text="${adres}" th:selected="${adres.nr_adresu==spoldzielnia.nr_adresu}">>
+                                </option>
+                            </select>
+                        </td>
+                    </tr>
+                    <!-- Button save -->
+                    <tr>
+                        <td colspan="2">
+                            <button type="submit" class="btn btn-success float-right">
+                                <i class="fa-regular fa-floppy-disk mr-1"></i>Zapisz
+                            </button>
+                        </td>
+                    </tr>
+
+                </table>
+            </form>
+        </div>
+        <div class="col-12 justify-content-center">
+            <a class="btn btn-primary" th:href="@{/spoldzielnia}"> Powrót </a>
+        </div>
+    </div>
+
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

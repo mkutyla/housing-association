@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Adresy</title>
+    <link rel="icon" type="image/svg" th:href="@{/images/favicon.svg}">
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" crossorigin="anonymous">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/main" title="Strona główna"><i class="fa-solid fa-building"></i> BADA Spółdzielnia Mieszkaniowa</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto align-items-center">
+
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/main}">Strona główna</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:inline="text" style="color:lightskyblue;">
+                        <span class="fa-solid fa-user"></span>
+                        <b style="text-transform:capitalize">[[${#httpServletRequest.remoteUser}]]</b>
+                    </a>
+                </li>
+
+                <form class="navbar-form" name="logoutForm" th:action="@{/index}" method="post">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <button class="btn btn-primary" type="button"
+                                    onclick="successfullyLogout()" title="Wyloguj" value="Sign Out">
+                                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            </button>
+                        </a>
+                    </li>
+                </form>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container justify-content-center mt-3">
+    <div class="row justify-content-center">
+        <h1 class="text-center">Tabela Adresy</h1>
+        <div class="w-100"></div>
+        <div class="scroll">
+            <div class="table-scroll">
+                <table class="table-bordered table">
+
+                    <thead class="sticky-top thead-light">
+                    <tr>
+                        <th>Nr adresu</th>
+                        <th>Ulica</th>
+                        <th>Nr budynku</th>
+                        <th>Nr lokalu</th>
+                        <th>Miasto</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr th:each="adres : ${adresy}">
+                        <td th:text="${adres.nr_adresu}">Nr_adresu</td>
+                        <td th:text="${adres.ulica}">Ulica</td>
+                        <td th:text="${adres.nr_budynku}">Nr_budynku</td>
+                        <td th:text="${adres.nr_lokalu}">Nr_lokalu</td>
+                        <td th:text="${adres.miasto}">Miasto</td>
+                        <td>
+                            <div class="d-flex justify-content-start align-items-center">
+                                <div class="col">
+                                    <a type="button" class="btn btn-outline-primary"
+                                       th:href="@{'/adres/edit/' + ${adres.nr_adresu}}">
+                                        <i class="fa-solid fa-pencil mr-1"></i>Edytuj</a>
+                                </div>
+                                <div class="col">
+                                    <a type="button" class="btn btn-outline-danger"
+                                       th:href="@{'/adres/delete/' + ${adres.nr_adresu}}">
+                                        <i class="fa-solid fa-trash-can mr-1"></i>Usuń</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-auto">
+            <a class="btn btn-primary" th:href="@{/main}"> Powrót </a>
+        </div>
+        <div class="col-auto">
+            <a class="btn btn-primary" th:href="@{/adres/add}">
+                <i class="fa-solid fa-plus mr-1"></i>Dodaj </a>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

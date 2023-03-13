@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Błąd</title>
+    <link rel="icon" type="image/svg" th:href="@{/images/favicon.svg}">
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.2.1/css/all.css" crossorigin="anonymous">
+
+</head>
+<body><!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/main" title="Strona główna"><i class="fa-solid fa-building"></i> BADA
+            Spółdzielnia Mieszkaniowa</a>
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <form method="post" th:action="@{/main}">
+                <div class="form-group">
+                    <div><b><p style="font-size:30px">Error</p></b></div>
+                    <div><p style="font-size:24px">403 - Forbidden page: brak uprawnień</p></div>
+                </div>
+                <button class="btn btn-primary" type="submit" value="Sign In">Powrót do strony głównej</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+</html>
