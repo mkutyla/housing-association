@@ -2,6 +2,7 @@
 A web app, used for operating on an Oracle database. Made as an university project.
 
 Project's full documentation (in Polish) with app's functionality in ```doc.pdf```
+
 Examplary database (used in this project) can be created using ``create.SQL`` file
 
 # Collaborators
